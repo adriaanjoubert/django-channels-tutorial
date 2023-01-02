@@ -31,8 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "daphne",
-    "chat",
+    'daphne',
+    'chat',
+    'file_download',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -124,4 +125,9 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+
 ASGI_APPLICATION = 'django_channels_tutorial.asgi.application'
+
+
+MEDIA_ROOT = 'media'
+MEDIA_URL = 'media/'

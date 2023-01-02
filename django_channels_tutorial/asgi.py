@@ -14,6 +14,8 @@ from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.security.websocket import AllowedHostsOriginValidator
 from django.core.asgi import get_asgi_application
 
+import file_download.routing
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_channels_tutorial.settings")
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
@@ -26,6 +28,9 @@ import chat.routing  # noqa
 application = ProtocolTypeRouter({
     'http': django_asgi_app,
     'websocket': AllowedHostsOriginValidator(
-        AuthMiddlewareStack(URLRouter(chat.routing.websocket_urlpatterns))
+        AuthMiddlewareStack(URLRouter(
+            chat.routing.websocket_urlpatterns
+            + file_download.routing.websocket_urlpatterns
+        ))
     ),
 })

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>File Download</title>
+</head>
+<body>
+    <input id="download" type="button" value="Download file">
+    <script>
+        const fileDownloadSocket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/file-download/'
+        );
+
+        fileDownloadSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            window.open(data.url, '_blank')
+        };
+
+        fileDownloadSocket.onclose = function(e) {
+            console.error('File download socket closed unexpectedly');
+        };
+
+        document.querySelector('input#download').onclick = function(e) {
+            fileDownloadSocket.send(JSON.stringify({
+            }));
+        };
+    </script>
+</body>
+</html>
