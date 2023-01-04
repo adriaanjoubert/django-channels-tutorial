@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'daphne',
     'chat',
     'file_download',
+    'django_extensions',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -127,6 +128,14 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 ASGI_APPLICATION = 'django_channels_tutorial.asgi.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 
 MEDIA_ROOT = 'media'
